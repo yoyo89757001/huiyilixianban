@@ -56,6 +56,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication;
 import com.badoo.mobile.util.WeakHandler;
 import com.baidu.tts.client.SpeechSynthesizer;
@@ -138,7 +139,6 @@ import megvii.testfacepass.tts.control.MySyntherizer;
 import megvii.testfacepass.tts.control.NonBlockSyntherizer;
 import megvii.testfacepass.tts.listener.UiMessageListener;
 import megvii.testfacepass.tts.util.OfflineResource;
-import megvii.testfacepass.utils.CeShi;
 import megvii.testfacepass.utils.DateUtils;
 import megvii.testfacepass.utils.FacePassUtil;
 import megvii.testfacepass.utils.FileUtil;
@@ -301,6 +301,7 @@ public class MainActivity203 extends AppCompatActivity implements CameraManager.
     private Box2DFragment m_box2dFgm;
     private FragmentManager fragmentManager = null;
     private List<GuanHuai> guanHuaiList=new ArrayList<>();
+    private LottieAnimationView wangluo;
 
 
     @Override
@@ -380,8 +381,7 @@ public class MainActivity203 extends AppCompatActivity implements CameraManager.
                     }
                 }
 
-                CeShi cc = new CeShi();
-                cc.statrt();
+
 
             }
         }).start();
@@ -1685,7 +1685,7 @@ public class MainActivity203 extends AppCompatActivity implements CameraManager.
                                 //识别的
                                 //  getFaceImageByFaceToken(result.trackId, faceToken);
                                 Log.d("RecognizeThread", "识别了");
-                                Log.d("RecognizeThread", subjectBox.getAll().get(0).toString());
+                           //     Log.d("RecognizeThread", subjectBox.getAll().get(0).toString());
                                 Subject subject = subjectBox.query().equal(Subject_.teZhengMa, new String(result.faceToken)).build().findUnique();
                                 Log.d("RecognizeThread", "subject:" + subject);
                                 if (!oneTzm.equals(new String(result.faceToken))) {
@@ -1931,6 +1931,7 @@ public class MainActivity203 extends AppCompatActivity implements CameraManager.
         }
     }
 
+
     private void adaptFrameLayout() {
         SettingVar.isButtonInvisible = false;
         SettingVar.iscameraNeedConfig = false;
@@ -1993,7 +1994,8 @@ public class MainActivity203 extends AppCompatActivity implements CameraManager.
         TableLayout mHudView = findViewById(R.id.hud_view);
         shipingView = findViewById(R.id.ijkplayview);
         shipingView.setVisibility(View.GONE);
-
+        wangluo = (LottieAnimationView) findViewById(R.id.wangluo);
+        wangluo.setSpeed(1.8f);
         //背景
         daBg.setBackgroundResource(R.color.dabg);
         scrollView.setSmoothScrollingEnabled(true);
@@ -2649,6 +2651,16 @@ public class MainActivity203 extends AppCompatActivity implements CameraManager.
             //  dibuliebiao.setAdapter(diBuAdapter);
             return;
         }
+        if (event.equals("wangluoyichang_true")){
+            wangluo.setVisibility(View.GONE);
+            return;
+
+        }
+        if (event.equals("wangluoyichang_flase")){
+            wangluo.setVisibility(View.VISIBLE);
+            return;
+        }
+
         Toast tastyToast = TastyToast.makeText(MainActivity203.this, event, TastyToast.LENGTH_LONG, TastyToast.INFO);
         tastyToast.setGravity(Gravity.CENTER, 0, 0);
         tastyToast.show();

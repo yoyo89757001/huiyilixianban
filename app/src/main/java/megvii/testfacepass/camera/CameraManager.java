@@ -179,9 +179,8 @@ public class CameraManager implements CameraPreview.CameraPreviewListener {
                             previewRotation = (info.orientation - degrees + 360) % 360;
                         }
 //                        previewRotation = 90;
-                        if (SettingVar.isSettingAvailable) {
-                            previewRotation = SettingVar.cameraPreviewRotation;
-                        }
+
+                        previewRotation = SettingVar.cameraPreviewRotation;
 
                         Log.i("CameraManager", String.format("camera rotation: %d %d %d", degrees, info.orientation, previewRotation));
                         camera.setDisplayOrientation(previewRotation);

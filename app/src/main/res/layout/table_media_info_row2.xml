@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:paddingBottom="0dip"
     android:paddingLeft="16dip"
     android:paddingRight="16dip"

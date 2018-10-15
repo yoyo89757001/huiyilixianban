@@ -64,7 +64,7 @@ public class MyApplication extends Application implements Application.ActivityLi
         myApplication = this;
         mBoxStore = MyObjectBox.builder().androidContext(this).build();
 
-        Bugly.init(getApplicationContext(), "acd60de457", false);
+        Bugly.init(getApplicationContext(), "b3082246d6", false);
 
         //适配
         ScreenAdapterTools.init(this);
@@ -134,6 +134,9 @@ public class MyApplication extends Application implements Application.ActivityLi
         DisplayMetrics dm = getResources().getDisplayMetrics();
         sDens = dm.densityDpi;
 
+        Intent intent = new Intent(getApplicationContext(), MyService.class);
+        bindService(intent, serviceConnection,  Context.BIND_AUTO_CREATE);
+        Log.d("MyApplication", "开启APP服务....");
 
     }
 
@@ -163,9 +166,6 @@ public class MyApplication extends Application implements Application.ActivityLi
             CommonData.mNowContext = activity;
         }
 
-        Intent intent = new Intent(activity, MyService.class);
-        bindService(intent, serviceConnection,  Context.BIND_AUTO_CREATE);
-        Log.d("MyApplication", "开启APP服务....");
     }
 
     @Override

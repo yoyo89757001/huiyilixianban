@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/root_rl"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_xiaoxi"
+        android:layout_marginLeft="50px"
+        android:layout_marginRight="50px"
+        android:background="@drawable/zidonghuoqu_baise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/biaoti"
+            android:textSize="50px"
+            android:text="生日"
+            android:layout_marginLeft="40px"
+            android:textColor="@color/textcolor"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/neirong"
+            android:layout_toRightOf="@+id/biaoti"
+            android:layout_centerVertical="true"
+            android:padding="10px"
+            android:textColor="@color/textcolor"
+            android:textSize="40px"
+            android:layout_toLeftOf="@+id/lingqu"
+            android:text="祝你生日快乐"
+            android:gravity="center"
+            android:layout_marginLeft="10px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/lingqu"
+            android:textSize="30px"
+            android:ems="1"
+            android:layout_marginLeft="40px"
+            android:layout_marginRight="32px"
+            android:textColor="@color/textcolor"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/xiaoxi_im"
+        android:layout_width="90px"
+        android:layout_marginLeft="80px"
+        android:layout_height="90px" />
+
+
+</RelativeLayout>

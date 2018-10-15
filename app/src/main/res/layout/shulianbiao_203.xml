@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/touxiang"
+        android:scaleType="fitXY"
+        android:layout_width="100px"
+        android:layout_height="100px" />
+
+    <TextView
+        android:id="@+id/name"
+        android:textSize="20px"
+        android:textColor="@color/white"
+        android:layout_below="@+id/touxiang"
+        android:layout_marginTop="8px"
+        android:layout_marginBottom="8px"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+
+</RelativeLayout>

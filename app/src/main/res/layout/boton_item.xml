@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:gravity="center_horizontal"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:background="#ad234f80"
+        android:layout_marginLeft="15px"
+        android:gravity="center_horizontal"
+        android:layout_marginRight="15px"
+        android:orientation="vertical"
+        android:layout_width="186px"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/db_touxiang"
+            android:layout_marginTop="20px"
+            android:layout_width="96px"
+            android:layout_height="96px" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="20px"
+            android:layout_below="@+id/db_touxiang"
+            android:id="@+id/db_name"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="30px"
+            android:layout_marginBottom="30px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

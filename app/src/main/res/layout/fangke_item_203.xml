@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/root_rl"
+    android:background="@drawable/jianbian_bg_fangke"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:background="@drawable/vipbgbgbg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <megvii.testfacepass.view.MianBanJiView
+        android:id="@+id/mianbanjiview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    <TextView
+        android:id="@+id/name"
+        android:textColor="@color/white"
+        android:textSize="70px"
+        android:layout_below="@+id/mianbanjiview"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:textColor="@color/white"
+        android:textSize="40px"
+        android:text="莅临参观指导"
+        android:layout_below="@+id/name"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

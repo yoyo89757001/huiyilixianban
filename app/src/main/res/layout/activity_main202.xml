@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clipChildren="false"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TableLayout
+        android:id="@+id/hud_view"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/ijk_transparent_dark"
+        android:padding="8dp" />
+
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/da_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+        <RelativeLayout
+            android:id="@+id/rl1"
+            android:background="#EFF0F2"
+            android:layout_width="match_parent"
+            android:layout_height="150px">
+
+                <ImageView
+                    android:src="@drawable/logologo"
+                    android:scaleType="fitXY"
+                    android:tint="@color/blake"
+                    android:layout_marginTop="14px"
+                    android:layout_marginLeft="16px"
+                    android:layout_width="200px"
+                    android:layout_height="70px" />
+
+
+                <TextView
+                    android:textColor="@color/textcolor"
+                    android:textSize="46px"
+                    android:layout_marginRight="16px"
+                    android:id="@+id/xiaoshi"
+                    android:layout_marginTop="14px"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10px"
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/kaoqing"
+                    android:textSize="26px"
+                    android:text="考勤:10/30"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_marginLeft="20px"
+                    android:textSize="26px"
+                    android:text="访客:10"
+                    android:layout_toRightOf="@+id/kaoqing"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/riqi"
+                    android:textSize="26px"
+                    android:layout_marginTop="6px"
+                    android:layout_below="@+id/kaoqing"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/xingqi"
+                    android:textSize="26px"
+                    android:layout_marginTop="6px"
+                    android:layout_below="@+id/kaoqing"
+                    android:layout_toRightOf="@+id/riqi"
+                    android:layout_marginLeft="20px"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:id="@+id/tianqi"
+                    android:textSize="26px"
+                    android:layout_below="@+id/riqi"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/wendu"
+                    android:textSize="26px"
+                    android:layout_marginLeft="20px"
+                    android:layout_toRightOf="@+id/tianqi"
+                    android:layout_below="@+id/riqi"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:id="@+id/v11"
+                android:layout_alignParentBottom="true"
+                android:background="#b4b5b6"
+                android:layout_height="1dp"/>
+
+        </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_below="@+id/rl1"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/glglg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_weight="0.8"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <android.support.v7.widget.CardView
+                app:cardCornerRadius="10px"
+                app:cardElevation="6px"
+                android:layout_marginTop="20px"
+                android:layout_marginLeft="20px"
+                android:layout_marginBottom="20px"
+                android:layout_marginRight="40px"
+                android:layout_toLeftOf="@+id/ttzz22"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <!--公告-->
+
+                <com.sunfusheng.marqueeview.MarqueeView
+                    android:textColor="@color/tabtextcolo"
+                    android:text="明天12点开会"
+                    app:mvAnimDuration="1000"
+                    android:layout_below="@+id/ttzz"
+                    app:mvDirection="bottom_to_top"
+                    app:mvInterval="3000"
+                    android:background="@drawable/jj_gg_bg"
+                    app:mvTextColor="@color/textcolor"
+                    app:mvTextSize="26px"
+                    app:mvSingleLine="false"
+                    android:id="@+id/marqueeView"
+                    android:paddingTop="60px"
+                    android:paddingLeft="26px"
+                    android:paddingRight="20px"
+                    android:paddingBottom="20px"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:textColor="@color/white"
+                    android:text="NOTICE"
+                    android:textSize="36px"
+                    android:id="@+id/ttzz"
+                    android:paddingLeft="20px"
+                    android:gravity="center_vertical"
+                    android:background="#D7D7D9"
+                    android:layout_width="match_parent"
+                    android:layout_height="50px" />
+
+            </android.support.v7.widget.CardView>
+
+
+            <TextView
+                android:textColor="#D7D7D7"
+                android:text="NOTICE\nBULLETIN"
+                android:textSize="36px"
+                android:id="@+id/ttzz22"
+                android:ems="3"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <android.support.v7.widget.CardView
+                app:cardCornerRadius="10px"
+                app:cardElevation="6px"
+                android:layout_marginTop="20px"
+                android:layout_marginLeft="20px"
+                android:layout_marginBottom="20px"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginRight="20px"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <!--"第二块"-->
+            <megvii.testfacepass.camera.CameraPreview
+                android:id="@+id/preview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"/>
+
+            <megvii.testfacepass.ljkplay.widget.media.IjkVideoView
+                android:id="@+id/ijkplayview"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <TextView
+                android:textColor="#D7D7D7"
+                android:text="PICTURE\nADVERTISEMENT"
+                android:textSize="36px"
+                android:id="@+id/ttzz2233"
+                android:ems="4"
+                android:layout_centerVertical="true"
+               android:layout_marginLeft="10px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.CardView
+                app:cardCornerRadius="10px"
+                app:cardElevation="4px"
+                android:layout_toRightOf="@+id/ttzz2233"
+                android:layout_marginTop="20px"
+                android:layout_marginLeft="10px"
+                android:layout_marginBottom="20px"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginRight="20px"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.jude.rollviewpager.RollPagerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/lunboview"
+                    app:rollviewpager_hint_color="#a95015e6"
+                    app:rollviewpager_hint_alpha="80"
+                    android:layout_centerVertical="true"
+                    app:rollviewpager_play_delay="3000"/>
+
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <!--//竖向列表-->
+    <megvii.testfacepass.view.SlowScrollView
+        android:id="@+id/scrollview"
+        android:elevation="6dp"
+        android:layout_below="@+id/rl1"
+        android:layout_width="150px"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/shu_liebiao"
+            android:orientation="vertical"
+            android:background="#EFF0F2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </LinearLayout>
+    </megvii.testfacepass.view.SlowScrollView>
+
+    <View
+        android:layout_width="1dp"
+        android:background="#b4b5b6"
+        android:id="@+id/glglg"
+        android:layout_below="@+id/rl1"
+        android:layout_toRightOf="@+id/scrollview"
+        android:layout_height="match_parent"/>
+
+
+    <ImageView
+        android:background="#867b7a7a"
+        android:id="@+id/yinying"
+        android:visibility="gone"
+        android:elevation="9dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--一个列表-->
+    <RelativeLayout
+        android:id="@+id/root_layout"
+        android:elevation="10dp"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_toRightOf="@+id/scrollview"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:clipChildren="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

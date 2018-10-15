@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/lingdao_bg"
+    android:id="@+id/root_rl"
+    android:layout_height="match_parent">
+
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/touxiang"
+            android:layout_marginLeft="190px"
+            android:layout_centerVertical="true"
+            android:layout_width="160px"
+            android:layout_height="200px" />
+
+        <RelativeLayout
+            android:layout_toRightOf="@+id/touxiang"
+            android:orientation="horizontal"
+            android:layout_marginLeft="40px"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/hhjj"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/name"
+                    android:textColor="@color/blake"
+                    android:textSize="30px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:textSize="14px"
+                    android:text="VIP"
+                    android:layout_marginLeft="20px"
+                    android:background="@drawable/zidonghuoqu17"
+                    android:textColor="@color/white"
+                    android:layout_width="50px"
+                    android:layout_height="22px" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/huanyinyu"
+                android:textSize="24px"
+                android:text="欢迎VIP客户光临"
+                android:layout_marginTop="40px"
+                android:layout_below="@+id/hhjj"
+                android:textColor="@color/blake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/putongyuangong_bg"
+    android:id="@+id/root_rl"
+    android:layout_height="match_parent">
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/touxiang"
+            android:layout_marginTop="40px"
+            android:layout_centerHorizontal="true"
+            android:layout_width="150px"
+            android:layout_height="150px" />
+
+
+            <TextView
+                android:layout_below="@+id/touxiang"
+                android:id="@+id/name"
+                android:layout_marginTop="20px"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/blake"
+                android:textSize="36px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+<LinearLayout
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="10px"
+    android:layout_below="@+id/name"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <Button
+    android:textSize="12px"
+    android:text="部门"
+        android:id="@+id/bubu"
+    android:background="@drawable/zidonghuoqu17"
+    android:textColor="@color/white"
+    android:layout_width="50px"
+    android:layout_height="22px" />
+    <TextView
+        android:layout_marginLeft="24px"
+        android:id="@+id/daka"
+        android:textColor="@color/blake"
+        android:textSize="28px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>

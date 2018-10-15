@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:clipChildren="false"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:clipChildren="false"
+        android:id="@+id/root_rl"
+        android:layout_width="match_parent"
+        android:layout_height="620px">
+
+        <ImageView
+            android:tint="#eeeeee"
+            android:background="@drawable/jj_yg_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <ImageView
+            android:id="@+id/touxiang"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100px"
+            android:background="@drawable/zidonghuoqu_hui"
+            android:scaleType="fitXY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_toRightOf="@+id/touxiang"
+        android:layout_width="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/name"
+            android:textSize="50px"
+            android:textColor="@color/textcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_below="@+id/name"
+            android:orientation="horizontal"
+            android:layout_marginTop="30px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_below="@+id/name"
+                android:id="@+id/xingbie"
+                android:textSize="30px"
+                android:textColor="@color/textcolor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_below="@+id/name"
+                android:id="@+id/nianling"
+                android:textSize="30px"
+                android:layout_marginLeft="20px"
+                android:textColor="@color/textcolor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

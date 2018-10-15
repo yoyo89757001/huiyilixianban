@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clipChildren="false"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+        <megvii.testfacepass.camera.CameraPreview
+            android:id="@+id/preview"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:visibility="visible"
+            android:layout_gravity="center_vertical" />
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/da_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+        <!--<megvii.testfacepass.view.FaceView-->
+            <!--android:id="@+id/fcview"-->
+            <!--android:visibility="visible"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+
+
+    <!--<megvii.testfacepass.view.DBG_View-->
+    <!--android:layout_width="100dp"-->
+    <!--android:id="@+id/dabg"-->
+    <!--android:background="@color/colorBar_bg"-->
+    <!--android:layout_height="100dp" />-->
+
+    <TableLayout
+        android:id="@+id/hud_view"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/ijk_transparent_dark"
+        android:padding="8dp" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl1"
+            android:layout_marginTop="30px"
+            android:layout_marginLeft="46px"
+            android:layout_marginRight="46px"
+            android:layout_width="wrap_content"
+            android:layout_height="44px">
+
+                <ImageView
+                    android:src="@drawable/logologo"
+                    android:scaleType="fitXY"
+                    android:layout_width="200px"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:textColor="@color/white"
+                    android:textSize="20px"
+                    android:id="@+id/riqi"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:textColor="@color/white"
+                    android:textSize="40px"
+                    android:id="@+id/xiaoshi"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl2"
+            android:background="#340000ff"
+            android:layout_marginTop="30px"
+            android:layout_marginLeft="36px"
+            android:layout_marginRight="36px"
+            android:layout_below="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="460px">
+
+
+            <TextView
+                android:id="@+id/wendu"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="20px"
+                android:textSize="40px"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tianqi"
+                android:layout_marginLeft="20px"
+                android:textSize="36px"
+                android:layout_marginTop="10px"
+                android:layout_below="@+id/wendu"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/fengli"
+                android:layout_marginLeft="20px"
+                android:textSize="38px"
+                android:layout_marginTop="10px"
+                android:layout_below="@+id/tianqi"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:id="@+id/tianqi_im"
+                android:layout_marginLeft="40px"
+                android:layout_toRightOf="@+id/wendu"
+                android:background="@drawable/duoyun"
+                android:layout_marginTop="20px"
+                android:layout_width="100px"
+                android:layout_height="100px" />
+
+            <TextView
+                android:id="@+id/ziwaixian"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="10px"
+                android:textSize="36px"
+                android:layout_below="@+id/fengli"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:layout_below="@+id/ziwaixian"
+                android:id="@+id/qiangdu_bg"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="10px"
+                android:layout_width="300px"
+                android:layout_height="50px" />
+
+            <!--<TextView-->
+                <!--android:id="@+id/shidu"-->
+                <!--android:layout_marginLeft="20px"-->
+                <!--android:layout_marginTop="10px"-->
+                <!--android:textSize="36px"-->
+                <!--android:layout_below="@+id/ziwaixian"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+
+            <TextView
+                android:id="@+id/kaoqing"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="10px"
+                android:textSize="36px"
+                android:text="考勤:10/30"
+                android:layout_below="@+id/qiangdu_bg"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="10px"
+                android:textSize="36px"
+                android:text="访客:10"
+                android:layout_below="@+id/kaoqing"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_toRightOf="@+id/tianqi_im"
+                    android:layout_marginLeft="30px"
+                    android:layout_marginTop="40px"
+                    android:id="@+id/v11"
+                    android:layout_marginBottom="40px"
+                    android:background="@color/white"
+                    android:layout_height="match_parent"/>
+
+            <megvii.testfacepass.ljkplay.widget.media.IjkVideoView
+                android:id="@+id/ijkplayview"
+                android:layout_marginLeft="20px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/v11"
+                android:layout_width="match_parent"
+                android:layout_height="500px"/>
+
+            <com.jude.rollviewpager.RollPagerView
+                android:layout_width="match_parent"
+                android:layout_height="500px"
+                android:id="@+id/lunboview"
+                app:rollviewpager_hint_color="#a95015e6"
+                app:rollviewpager_hint_alpha="80"
+                android:layout_marginLeft="20px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/v11"
+                app:rollviewpager_play_delay="3000"/>
+
+
+
+        </RelativeLayout>
+
+
+    <HorizontalScrollView
+        android:layout_below="@+id/root_layout"
+        android:layout_width="match_parent"
+        android:id="@+id/scrollview"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="30px"
+            android:id="@+id/boton_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:id="@+id/root_layout"
+        android:background="@color/transparent"
+        android:layout_below="@+id/rl2"
+        android:layout_marginTop="30px"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="1000px">
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

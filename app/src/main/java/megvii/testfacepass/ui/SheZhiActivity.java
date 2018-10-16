@@ -159,7 +159,13 @@ public class SheZhiActivity extends Activity {
                     @Override
                     public void onClick(View v) {
                         baoCunBean.setHoutaiDiZhi(diZhiDialog.getUrl());
+                        String sss[] =baoCunBean.getHoutaiDiZhi().split(":");
+                        if (sss.length>=2){
+                            baoCunBean.setIp(sss[1].replace("//",""));
+                        }
+                        Log.d("SheZhiActivity", baoCunBean.getIp());
                         baoCunBeanDao.put(baoCunBean);
+
                         diZhiDialog.dismiss();
                     }
                 });

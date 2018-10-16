@@ -68,9 +68,9 @@ public class MyApplication extends Application implements Application.ActivityLi
 
         //适配
         ScreenAdapterTools.init(this);
-        JPushInterface.setDebugMode(false); 	// 设置开启日志,发布时请关闭日志
-        JPushInterface.init(getApplicationContext());
-        JPushInterface.setAlias(getApplicationContext(),1, FileUtil.getSerialNumber(this)==null?FileUtil.getIMSI():FileUtil.getSerialNumber(this));
+      //  JPushInterface.setDebugMode(false); 	// 设置开启日志,发布时请关闭日志
+      //  JPushInterface.init(getApplicationContext());
+      //  JPushInterface.setAlias(getApplicationContext(),1, FileUtil.getSerialNumber(this)==null?FileUtil.getIMSI():FileUtil.getSerialNumber(this));
         Log.d("MyApplication","机器码"+ FileUtil.getSerialNumber(this) == null ? FileUtil.getIMSI() : FileUtil.getSerialNumber(this));
         //全局dialog
         this.registerActivityLifecycleCallbacks(this);//注册

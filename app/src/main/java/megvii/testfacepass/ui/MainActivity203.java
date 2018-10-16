@@ -2426,9 +2426,9 @@ public class MainActivity203 extends AppCompatActivity implements CameraManager.
           //  Log.d("MainActivity203", "yaw:" + yaw);
             if (pitch < 25 && pitch > -25 && roll < 25 && roll > -25 && yaw < 25 && yaw > -25 && face.blur < 0.4) {
                 try {
-                    Log.d("MainActivity203", "tID:" + tID);
-                    Log.d("MainActivity203", "face.trackId:" + face.trackId);
-                    Log.d("MainActivity203", "isLink:" + isLink);
+                 //   Log.d("MainActivity203", "tID:" + tID);
+                  //  Log.d("MainActivity203", "face.trackId:" + face.trackId);
+                  //  Log.d("MainActivity203", "isLink:" + isLink);
                     if (tID == face.trackId && isLink) {  //入库成功后将 tID=-1;
                         Log.d("MainActivity203", "进来");
                         isLink = false;

@@ -46,6 +46,15 @@ public class BaoCunBean {
     private boolean isTianQi;
     private String shangBanTime;
     private String xiaBanTime;
+    private String ip;
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
 
     public String getShangBanTime() {
         return shangBanTime;

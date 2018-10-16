@@ -8,23 +8,25 @@ public class TuiSongBean {
 
 
     /**
-     * id : 1019047083040571392
-     * title : 绑定激活
-     * url : /app/getMachine
+     * machineCode : gztengxun_ejvw
+     * id : 1052099743830077440
+     * title : 单个人员入库
+     * url : /app/employeesPush
+     * status : 1
      */
 
+    private String machineCode;
     private String id;
     private String title;
     private String url;
     private int status;
 
-
-    public int getStatus() {
-        return status;
+    public String getMachineCode() {
+        return machineCode;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setMachineCode(String machineCode) {
+        this.machineCode = machineCode;
     }
 
     public String getId() {
@@ -49,5 +51,13 @@ public class TuiSongBean {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

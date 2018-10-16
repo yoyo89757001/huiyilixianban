@@ -155,7 +155,6 @@ public class MyReceiver extends BroadcastReceiver {
 						}
 						p1=renShu.getContent().getBottemImageUrl().substring(1,renShu.getContent().getBottemImageUrl().length()-1);
 						String p2=renShu.getContent().getPopupImageUrl().substring(1,renShu.getContent().getPopupImageUrl().length()-1);
-
 						BenDiMBbean benDiMBbean=new BenDiMBbean();
 						benDiMBbean.setId(System.currentTimeMillis());
 						benDiMBbean.setBottemImageUrl(p1);
@@ -166,12 +165,10 @@ public class MyReceiver extends BroadcastReceiver {
 						benDiMBbeanDao.put(benDiMBbean);
 						baoCunBean.setWenzi(p1);
 					}
-
 					List<BenDiMBbean> f=  benDiMBbeanDao.getAll();
 					for (BenDiMBbean ll:f){
 						Log.d(TAG, "ll.getPhoto_index():" + ll.getPhoto_index()+ll.getSubType());
 					}
-
 					baoCunBeanDao.put(baoCunBean);
 					Intent intent2=new Intent("gxshipingdizhi");
 					intent2.putExtra("bgPath",p1);
@@ -278,7 +275,6 @@ public class MyReceiver extends BroadcastReceiver {
 									@Override
 									protected void warn(BaseDownloadTask task) {
 										//在下载队列中(正在等待/正在下载)已经存在相同下载连接与相同存储路径的任务
-
 									}
 								}).start();
 
@@ -301,7 +297,6 @@ public class MyReceiver extends BroadcastReceiver {
 					case "单个人员入库"://员工
 						link_dangeYuanGong(renShu.getId(),renShu.getStatus(),renShu.getUrl());
 						break;
-
 					case "小邮局入库":
 						link_youju(renShu.getId(),renShu.getStatus(),renShu.getUrl());
 						break;
@@ -397,22 +392,6 @@ public class MyReceiver extends BroadcastReceiver {
 
 		ToastUtils.getInstances().showDialog(title,contextss, (int) p);
 
-//		NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-//		//Intent intent = new Intent(context, XXXActivity.class);//将要跳转的界面
-//		Intent intent = new Intent();//只显示通知，无页面跳转
-//		builder.setAutoCancel(true);//点击后消失
-//		builder.setSmallIcon(R.drawable.huiyi_logo);//设置通知栏消息标题的头像
-//		//builder.setDefaults(NotificationCompat.DEFAULT_SOUND);//设置通知铃声
-//		builder.setContentTitle(title);
-//		builder.setContentText(contextss);
-//		builder.setProgress(100, (int) p,false);
-//		builder.setDefaults(Notification.DEFAULT_LIGHTS); //设置通知的提醒方式： 呼吸灯
-//		builder.setPriority(NotificationCompat.PRIORITY_MAX); //设置通知的优先级：最大
-//		//利用PendingIntent来包装我们的intent对象,使其延迟跳转
-//		PendingIntent intentPend = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-//		builder.setContentIntent(intentPend);
-//		NotificationManager manager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
-//		manager.notify(0, builder.build());
 	}
 
 	private void jieya(String pathZip, final String path222){

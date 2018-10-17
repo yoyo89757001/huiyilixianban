@@ -1694,6 +1694,7 @@ public class MainActivity203 extends AppCompatActivity implements CameraManager.
                                     if (subject != null) {
                                         linkedBlockingQueue.offer(subject);
                                         link_shangchuanjilu(subject);
+                                        link_qiandao(subject);
                                     }
 
 //                                    if (subject != null) {
@@ -2055,44 +2056,7 @@ public class MainActivity203 extends AppCompatActivity implements CameraManager.
             }
         });
 
-        // marqueeView = (MarqueeView) findViewById(R.id.marqueeView);
-        //   List<String> info = new ArrayList<>();
-        //  info.add("大家好我是孙福生哦哦大家好我是孙福生哦哦大家好我是孙福生哦哦大家好我是孙福生哦哦大家好我是孙福生哦哦大家好我是孙福生哦哦大家好我是孙福生哦哦" +
-        //       "大家好我是孙福生哦哦大家好我是孙福生哦哦大家好我是孙福生哦哦大家好我是孙福生哦哦大家好我是孙福生哦哦大家好我是孙福生哦哦大家好我是孙福生哦哦");
-        //70个字
-        // info.add("明天上午12点开会明天上午12点开会明天上午12点开会明天上午12点开会明天上午12点开会明天上午12点开会明天上午12点开会明天上午12点开会明天上午12点开会" +
-        //        "明天上午12点开会明天上午12点开会明天上午12点开会明天上午12点开会明天上午12点开会明天上午12点开会明天上午12点开会明天上午12点开会明天上午12点开会");
-        //marqueeView.startWithList(info);
-        // 在代码里设置自己的动画
-        //  marqueeView.startWithList(info, R.anim.anim_bottom_in, R.anim.anim_top_out);
-//        shipingView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                long curTime = System.currentTimeMillis();
-//                long durTime = curTime - mLastClickTime;
-//                mLastClickTime = curTime;
-//                if (durTime < CLICK_INTERVAL) {
-//                    ++mSecretNumber;
-//                    if (mSecretNumber == 3) {
-//                        dialog=new XiuGaiGaoKuanDialog(MainActivity.this,MainActivity.this);
-//                        dialog.setCanceledOnTouchOutside(false);
-//                        dialog.setContents("修改视频的宽高",(shipingView.getRight()-shipingView.getLeft())+"",(shipingView.getBottom()-shipingView.getTop())+"",2);
-//                        dialog.setOnQueRenListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                dialog.dismiss();
-//                            }
-//                        });
-//                        dialog.show();
-//                    }
-//                } else {
-//                    mSecretNumber = 0;
-//                }
-//            }
-//        });
-//
-//
+
 
         shipingView.setHudView(mHudView); //http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4
         shipingView.setVideoPath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "laowang.mp4");
@@ -2482,7 +2446,6 @@ public class MainActivity203 extends AppCompatActivity implements CameraManager.
 
             }
         }
-
 
     }
 
@@ -2929,6 +2892,79 @@ public class MainActivity203 extends AppCompatActivity implements CameraManager.
             }
         });
     }
+
+    //上传识别记录
+    private void link_qiandao(final Subject subject) {
+        final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .writeTimeout(100000, TimeUnit.MILLISECONDS)
+                .connectTimeout(100000, TimeUnit.MILLISECONDS)
+                .readTimeout(100000, TimeUnit.MILLISECONDS)
+//				    .cookieJar(new CookiesManager())
+                .retryOnConnectionFailure(true)
+                .build();
+        RequestBody body = null;
+
+        body = new FormBody.Builder()
+                .add("id", subject.getId()+"") //
+                //.add("companyId", subject.getCompanyId()+"") //公司di
+                //.add("companyName",subject.getCompanyName()+"") //公司名称
+                //.add("storeId", subject.getStoreId()+"") //门店id
+                //.add("storeName", subject.getStoreName()+"") //门店名称
+              //  .add("subjectId", subject.getId() + "") //员工ID
+              //  .add("subjectType", subject.getPeopleType()) //人员类型
+                // .add("department", subject.getPosition()+"") //部门
+               // .add("discernPlace", FileUtil.getSerialNumber(this) == null ? FileUtil.getIMSI() : FileUtil.getSerialNumber(this))//识别地点
+                // .add("discernAvatar",  "") //头像
+              //  .add("identificationTime", DateUtils.time(System.currentTimeMillis() + ""))//时间
+                .build();
+        Request.Builder requestBuilder = new Request.Builder()
+                .header("Content-Type", "application/json")
+                .post(body)
+                .url(baoCunBean.getHoutaiDiZhi() + "/app/signIn");
+
+        // step 3：创建 Call 对象
+        Call call = okHttpClient.newCall(requestBuilder.build());
+
+        //step 4: 开始异步请求
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("AllConnects", "请求失败" + e.getMessage());
+                BenDiJiLuBean bean = new BenDiJiLuBean();
+                bean.setSubjectId(subject.getId());
+                bean.setDiscernPlace(FileUtil.getSerialNumber(MainActivity203.this) == null ? FileUtil.getIMSI() : FileUtil.getSerialNumber(MainActivity203.this));
+                bean.setSubjectType(subject.getPeopleType());
+                bean.setIdentificationTime(DateUtils.time(System.currentTimeMillis() + ""));
+                benDiJiLuBeanBox.put(bean);
+
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d("AllConnects", "请求成功" + call.request().toString());
+                //获得返回体
+                try {
+                    ResponseBody body = response.body();
+                    String ss = body.string().trim();
+                    Log.d("AllConnects", "上传识别记录" + ss);
+
+
+                } catch (Exception e) {
+                    BenDiJiLuBean bean = new BenDiJiLuBean();
+                    bean.setSubjectId(subject.getId());
+                    bean.setDiscernPlace(FileUtil.getSerialNumber(MainActivity203.this) == null ? FileUtil.getIMSI() : FileUtil.getSerialNumber(MainActivity203.this));
+                    bean.setSubjectType(subject.getPeopleType());
+                    bean.setIdentificationTime(DateUtils.time(System.currentTimeMillis() + ""));
+                    benDiJiLuBeanBox.put(bean);
+
+                    Log.d("WebsocketPushMsg", e.getMessage() + "gggg");
+                }
+            }
+        });
+    }
+
 
     //上传识别记录2
     private void link_shangchuanjilu2(final BenDiJiLuBean subject) {

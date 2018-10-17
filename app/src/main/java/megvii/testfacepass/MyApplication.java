@@ -63,6 +63,7 @@ public class MyApplication extends Application implements Application.ActivityLi
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.d("MyApplication", "MyApplication启动");
         myApplication = this;
         mBoxStore = MyObjectBox.builder().androidContext(this).build();
 
@@ -260,7 +261,7 @@ public class MyApplication extends Application implements Application.ActivityLi
                 }
             }
         }
-        return processName;
+        return null;
     }
 
 }

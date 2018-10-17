@@ -897,64 +897,6 @@ public class MyReceiver extends BroadcastReceiver {
 
 
 
-	//从老黄后台拿单人信息
-	private void link_getHouTaiDanRen(int id, final Context context, final int status){
-		final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
-		OkHttpClient okHttpClient=  new OkHttpClient.Builder()
-				.writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-				.connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-				.readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-//				.cookieJar(new CookiesManager())
-				.retryOnConnectionFailure(true)
-				.build();
-
-		RequestBody body = new FormBody.Builder()
-				.add("id",id+"")
-				.build();
-		Request.Builder requestBuilder = new Request.Builder()
-				.header("Content-Type", "application/json")
-				.post(body)
-				.url(baoCunBean.getHoutaiDiZhi()+"/getAppSubject.do");
-
-		// step 3：创建 Call 对象
-		Call call = okHttpClient.newCall(requestBuilder.build());
-
-		//step 4: 开始异步请求
-		call.enqueue(new Callback() {
-			@Override
-			public void onFailure(Call call, IOException e) {
-				Log.d("AllConnects", "请求失败"+e.getMessage());
-			}
-
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				Log.d("AllConnects", "请求成功"+call.request().toString());
-				//获得返回体
-				try{
-
-					ResponseBody body = response.body();
-					String ss=body.string().trim();
-					Log.d("AllConnects", "获取单人信息"+ss);
-
-					JsonObject jsonObject= GsonUtil.parse(ss).getAsJsonObject();
-					Gson gson=new Gson();
-					RenYuanInFo renYuanInFo=gson.fromJson(jsonObject,RenYuanInFo.class);
-
-					//保存到本地
-//					if (sheBeiInFoBeanDao.load(zhaoPianBean.getId())==null){
-//						//新增
-//						sheBeiInFoBeanDao.insert(zhaoPianBean);
-//					}
-					//先登陆
-				//	getOkHttpClient(context,status,null,renYuanInFo);
-					Log.d("MyReceiver", "登陆");
-
-				}catch (Exception e){
-					Log.d("WebsocketPushMsg", e.getMessage()+"gggg");
-				}
-			}
-		});
-	}
 
 
 	/**

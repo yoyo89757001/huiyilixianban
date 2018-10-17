@@ -11,6 +11,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Binder;
 import android.os.Environment;
 import android.os.IBinder;
+import android.os.Parcel;
+import android.os.RemoteException;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.Xml;
@@ -82,7 +85,6 @@ import okhttp3.ResponseBody;
 public class MyService extends Service {
 
     private static final String TAG = "ddddddddddd";
-    private MyBinder binder = new MyBinder();
     private static boolean  isLink=false;
     public OkHttpClient okHttpClient=null;
     private BaoCunBean baoCunBean=null;
@@ -98,13 +100,12 @@ public class MyService extends Service {
     private final String SDPATH = Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator+"ruitongzip";
     public static boolean isDW=true;
     private Box<GuanHuai> guanHuaiBox=null;
-
-    
+    private String jiqima=null;
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return binder;
+        return  new MyBinder();
     }
 
 
@@ -112,6 +113,7 @@ public class MyService extends Service {
     public void onCreate() {
         super.onCreate();
         context=MyService.this;
+        jiqima=(FileUtil.getSerialNumber(MyService.this) == null ? FileUtil.getIMSI() : FileUtil.getSerialNumber(MyService.this));
         stringBuilder=new StringBuilder();
         stringBuilder2=new StringBuilder();
         baoCunBeanDao = MyApplication.myApplication.getBoxStore().boxFor(BaoCunBean.class);
@@ -152,7 +154,8 @@ public class MyService extends Service {
                                 Log.d("MyService","收到消息:" + message);
 
                                 JsonObject jsonObject= GsonUtil.parse(message).getAsJsonObject();
-
+                                Gson gson=new Gson();
+                                final TuiSongBean renShu=gson.fromJson(jsonObject,TuiSongBean.class);
                                 if (jsonObject.get("title").getAsString().equals("人员入库") || jsonObject.get("title").getAsString().equals("访客入库")){
                                     FileDownloader.setup(MyService.this);
                                     isDW=true;
@@ -225,7 +228,7 @@ public class MyService extends Service {
                                                                 Log.d(TAG, "创建文件状态:" + file.mkdir());
                                                             }
                                                             showNotifictionIcon(0,"解压中","解压人脸库中");
-                                                            jieya(SDPATH+ File.separator+task.getFilename(),ss);
+                                                            jieya(SDPATH+ File.separator+task.getFilename(),ss,renShu.getMachineCode());
 
                                                             Log.d(TAG, "task.isRunning():" + task.isRunning()+ task.getFilename());
 
@@ -260,8 +263,7 @@ public class MyService extends Service {
                                     }
 
                                 }
-                                Gson gson=new Gson();
-                                TuiSongBean renShu=gson.fromJson(jsonObject,TuiSongBean.class);
+
                                 //1 新增 2修改//3是删除
                                 switch (renShu.getTitle()){
                                     case "单个访客入库":
@@ -358,11 +360,14 @@ public class MyService extends Service {
 
     }
 
+
     public class MyBinder extends Binder {
         /** * 获取Service的方法 * @return 返回PlayerService */
         public MyService getService(){
             return MyService.this;
         }
+
+
     }
 
     private void chonglian(final WebSocket webSocket){
@@ -394,7 +399,7 @@ public class MyService extends Service {
 
     }
 
-    private void jieya(String pathZip, final String path222){
+    private void jieya(String pathZip, final String path222, final String macCode){
 
         ZipFile zipFile=null;
         List fileHeaderList=null;
@@ -455,7 +460,7 @@ public class MyService extends Service {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        getOkHttpClient3(subjectList,path222);
+                        getOkHttpClient3(subjectList,path222,macCode);
                     }
                 }).start();
 
@@ -477,7 +482,7 @@ public class MyService extends Service {
     }
 
     //入库
-    public void getOkHttpClient3(final List<Subject> subjectList, final String trg){
+    public void getOkHttpClient3(final List<Subject> subjectList, final String trg,String macCode){
 
 
         if (MyApplication.myApplication.getFacePassHandler()==null){
@@ -536,9 +541,11 @@ public class MyService extends Service {
                         stringBuilderId.append(subjectList.get(j).getId());
                         stringBuilderId.append(",");
 
+                        gengxingzhuangtai(macCode,subjectList.get(j).getId()+"",true,"入库成功","人员入库");
                         Log.d(TAG,"批量入库成功："+ subjectList.get(j).getId());
 
                     }else {
+                        gengxingzhuangtai(macCode,subjectList.get(j).getId()+"",false,"入库失败"+faceResult.result,"人员入库");
                         stringBuilder2.append("入库添加图片失败:").append("ID:")
                                 .append(subjectList.get(j).getId()).append("姓名:")
                                 .append(subjectList.get(j).getName()).append("时间:")
@@ -547,7 +554,8 @@ public class MyService extends Service {
                     }
 
                 } catch (FacePassException e) {
-                    e.printStackTrace();
+                   // e.printStackTrace();
+                    gengxingzhuangtai(macCode,subjectList.get(j).getId()+"",false,"入库失败"+e.getMessage(),"人员入库");
                     stringBuilder2.append("入库添加图片失败:").append("ID:")
                             .append(subjectList.get(j).getId()).append("姓名:")
                             .append(subjectList.get(j).getName()).append("时间:")
@@ -556,6 +564,7 @@ public class MyService extends Service {
                 }
 
             }else {
+                gengxingzhuangtai(macCode,subjectList.get(j).getId()+"",false,"入库失败,图片文件不存在","人员入库");
                 stringBuilder2.append("入库失败文件不存在:").append("ID:")
                         .append(subjectList.get(j).getId()).append("姓名:")
                         .append(subjectList.get(j).getName()).append("时间:")
@@ -1097,20 +1106,20 @@ public class MyService extends Service {
                                         path=saveBitmap2File2(bitmapTX, FileUtil.SDPATH + File.separator + FileUtil.PATH + File.separator + fn, 100);
                                     }
                                     subject.setDisplayPhoto(path);
-                                    gengxingzhuangtai(machineCode,id,true,"成功");
+                                    gengxingzhuangtai(machineCode,id,true,"成功","单个人员入库");
                                     Log.d("MyReceiver", "单个访客入库成功"+subjectBox.put(subject));
                                 }else {
                                     showNotifictionIcon(0,"入库失败","图片不符合入库要求 "+renShu.getName());
-                                    gengxingzhuangtai(machineCode,id,false,"图片不符合入库要求");
+                                    gengxingzhuangtai(machineCode,id,false,"图片不符合入库要求","单个人员入库");
                                 }
 
                             } catch(FacePassException e){
-                                gengxingzhuangtai(machineCode,id,false,"异常");
+                                gengxingzhuangtai(machineCode,id,false,"异常","单个人员入库");
                                 showNotifictionIcon(0,"入库失败","异常 "+e.getMessage());
                              //   e.printStackTrace();
                             }
                         }else {
-                            gengxingzhuangtai(machineCode,id,false,"下载图片失败");
+                            gengxingzhuangtai(machineCode,id,false,"下载图片失败","单个人员入库");
                             showNotifictionIcon(0,"入库失败","下载图片失败 "+renShu.getName());
                         }
 
@@ -1122,7 +1131,7 @@ public class MyService extends Service {
                     }
 
                 }catch (Exception e){
-                    gengxingzhuangtai(machineCode,id,false,"出现异常");
+                    gengxingzhuangtai(machineCode,id,false,"出现异常","单个人员入库");
                     showNotifictionIcon(0,"入库出错","出现异常"+e.getMessage());
                 }
 
@@ -1232,10 +1241,10 @@ public class MyService extends Service {
                                     }
                                     subject.setDisplayPhoto(path);
                                     subjectBox.put(subject);
-                                    gengxingzhuangtai(machineCode,id,true,"成功");
+                                    gengxingzhuangtai(machineCode,id,true,"成功","单个人员入库");
                                     Log.d("MyReceiver", "单个员工入库成功");
                                 }else {
-                                    gengxingzhuangtai(machineCode,id,false,"图片不符合入库要求");
+                                    gengxingzhuangtai(machineCode,id,false,"图片不符合入库要求","单个人员入库");
 
                                     showNotifictionIcon(0,"入库失败","图片不符合入库要求 "+renShu.getName());
                                 }
@@ -1244,7 +1253,7 @@ public class MyService extends Service {
                                 showNotifictionIcon(0,"入库失败","异常 "+e.getMessage());
                             }
                         }else {
-                            gengxingzhuangtai(machineCode,id,false,"下载图片失败");
+                            gengxingzhuangtai(machineCode,id,false,"下载图片失败","单个人员入库");
                             showNotifictionIcon(0,"入库失败","下载图片失败 "+renShu.getName());
                         }
 
@@ -1260,7 +1269,7 @@ public class MyService extends Service {
                     }
 
                 }catch (Exception e){
-                    gengxingzhuangtai(machineCode,id,false,"出现异常");
+                    gengxingzhuangtai(machineCode,id,false,"出现异常","单个人员入库");
                     showNotifictionIcon( 0,"入库出错","出现异常"+e.getMessage());
                 }
 
@@ -1379,7 +1388,7 @@ public class MyService extends Service {
 
 
 
-    private void gengxingzhuangtai(String machineCode,String id, boolean kend,String miaoshu){
+    private void gengxingzhuangtai(String machineCode,String id, boolean kend,String miaoshu,String type){
         final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
@@ -1390,9 +1399,10 @@ public class MyService extends Service {
                 .build();
 
         RequestBody body = new FormBody.Builder()
-                .add("machineCode",machineCode )
+                .add("machineCode",machineCode+","+jiqima)
                 .add("machineS1", kend+"")  //成功或失败
                 .add("machineS2", miaoshu) //描述
+                .add("machineS3", type) //描述
                 .add("id", id )
                 .build();
         Request.Builder requestBuilder = new Request.Builder()

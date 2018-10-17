@@ -1,6 +1,7 @@
 package megvii.testfacepass;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
@@ -22,6 +23,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 
 
 import java.io.IOException;
+import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
 import io.objectbox.Box;
@@ -134,9 +136,11 @@ public class MyApplication extends Application implements Application.ActivityLi
         DisplayMetrics dm = getResources().getDisplayMetrics();
         sDens = dm.densityDpi;
 
-        Intent intent = new Intent(getApplicationContext(), MyService.class);
-        bindService(intent, serviceConnection,  Context.BIND_AUTO_CREATE);
-        Log.d("MyApplication", "开启APP服务....");
+        if (isAppProcess()) {
+            Intent intent = new Intent(getApplicationContext(), MyService.class);
+            bindService(intent, serviceConnection,  Context.BIND_AUTO_CREATE);
+            Log.d("MyService", "开启APP服务....");
+        }
 
     }
 
@@ -221,6 +225,42 @@ public class MyApplication extends Application implements Application.ActivityLi
     };
 
 
+    /**
+     * 判断该进程是否是app进程
+     * @return
+     */
+    public boolean isAppProcess() {
+        String processName = getProcessName();
+        if (processName == null || !processName.equalsIgnoreCase(this.getPackageName())) {
+            return false;
+        }else {
+            return true;
+        }
+    }
 
+    /**
+     * 获取运行该方法的进程的进程名
+     * @return 进程名称
+     */
+    public String getProcessName() {
+        int processId = android.os.Process.myPid();
+        String processName = null;
+        ActivityManager manager = (ActivityManager) getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+        Iterator iterator = manager != null ? manager.getRunningAppProcesses().iterator() : null;
+        if (iterator != null) {
+            while (iterator.hasNext()) {
+                ActivityManager.RunningAppProcessInfo processInfo = (ActivityManager.RunningAppProcessInfo) (iterator.next());
+                try {
+                    if (processInfo.pid == processId) {
+                        processName = processInfo.processName;
+                        return processName;
+                    }
+                } catch (Exception e) {
+    //                LogD(e.getMessage())
+                }
+            }
+        }
+        return processName;
+    }
 
 }
